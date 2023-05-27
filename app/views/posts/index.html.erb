@@ -1,2 +1,52 @@
-<h1>Posts#index</h1>
-<p>Find me in app/views/posts/index.html.erb</p>
+<div class="container">
+    <div class="row">
+        <!-- First column -->
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <div class="card-body" style="background-color: #f8f9fa;">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h2 class="text-center"><%= current_user.name %></h2>
+                            <p class="card-img-top" alt="Card image cap" style="object-fit: cover; height: 200px;">
+                                <%= image_tag current_user.image, class: "rounded-circle", style: "height: 100%;" if current_user.image.attached? %>
+                            </p>
+                            <h5 class="card-title" style="margin-bottom: 0;"><%= link_to 'Profile', user_path(current_user) %></h5>
+                            <h5 class="card-title" style="margin-bottom: 0;"><%= link_to 'New Post', new_post_path %></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second column -->
+        <div class="col-md-6">
+            <% @posts.each do |post| %>
+                <div class="card mb-3">
+                    <a href="<%= post_path(post) %>">
+                        <div class="aspect-ratio">
+                            <%= image_tag post.image, class: "card-img-top" if post.image.attached? %>
+                        </div>
+                    </a>
+                    <div class="card-body" style="background-color: #f8f9fa;">
+                        <h5 class="card-title" style="margin-bottom: 0;"><%= post.user.name %></h5>
+                        <div class="card-text">
+                            <p class="mb-0"><%= post.text %></p>
+                        </div>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+
+        <!-- Third column -->
+        <div class="col-md-2">
+            <% @users.each do |user| %>
+                <div class="card mb-3">
+                    <div class="d-flex align-items-center card-body" style="background-color: #f8f9fa;">
+                        <%= image_tag user.image, class: "rounded-circle", style: "height: 30px; width: 30px; margin-right: 10px;" if user.image.attached? %>
+                        <h5 class="card-title" style="margin-bottom: 0;"><%= link_to user.name, user_path(user) %></h5>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>
