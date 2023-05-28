@@ -28,10 +28,14 @@
                         </div>
                     </a>
                     <div class="card-body" style="background-color: #f8f9fa;">
-                        <h5 class="card-title" style="margin-bottom: 0;"><%= post.user.name %></h5>
+                        <h2 class="card-title" style="margin-bottom: 0;"><%= post.user.name %></h2>
                         <div class="card-text">
-                            <p class="mb-0"><%= post.text %></p>
+                            <h3 class="mb-0"><%= post.text %></h3>
                         </div>
+                <i class="far fa-heart text-danger fa-2x"></i>
+                <div class="d-inline-block ml-2 align-middle">
+                    <h4><%= post.likes.count %></h4>
+                </div>
                     </div>
                 </div>
             <% end %>
