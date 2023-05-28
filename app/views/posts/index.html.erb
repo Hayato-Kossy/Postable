@@ -32,10 +32,15 @@
                         <div class="card-text">
                             <h3 class="mb-0"><%= post.text %></h3>
                         </div>
-                <i class="far fa-heart text-danger fa-2x"></i>
+                <i class="fas fa-heart text-danger fa-2x"></i>
                 <div class="d-inline-block ml-2 align-middle">
                     <h4><%= post.likes.count %></h4>
                 </div>
+                <!-- Comments count -->
+                    <i class="fas fa-comment fa-2x ml-3"></i>
+                        <div class="d-inline-block ml-2 align-middle">
+                            <h4><%= post.comments.count %></h4>
+                        </div>
                     </div>
                 </div>
             <% end %>
