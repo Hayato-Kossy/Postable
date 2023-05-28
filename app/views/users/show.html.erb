@@ -21,6 +21,21 @@
                             <% end %>
                         </div>
                     </div>
+            <% @user.posts.each do |post| %>
+                <div class="card mb-3">
+                    <a href="<%= post_path(post) %>">
+                        <div class="aspect-ratio">
+                            <%= image_tag post.image, class: "card-img-top" if post.image.attached? %>
+                        </div>
+                    </a>
+                    <div class="card-body" style="background-color: #f8f9fa;">
+                        <h5 class="card-title" style="margin-bottom: 0;"><%= post.user.name %></h5>
+                        <div class="card-text">
+                            <p class="mb-0"><%= post.text %></p>
+                        </div>
+                    </div>
+                </div>
+            <% end %>
         </div>
         <div class="col-md-3">
         </div>

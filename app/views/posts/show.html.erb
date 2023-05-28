@@ -1,5 +1,6 @@
 <div class="container">
     <div class="row justify-content-center">
+    <div class="col-md-6">
         <div class="card d-flex">
             <div class="text-center">
                 <p class="card-img-top" alt="Card image cap" style="object-fit: cover; height: 150px;">
@@ -16,10 +17,46 @@
                 </div>
                 <p style="font-size: 18px;"><%= @post.text %></p>
             </div>
-            <% if @post.user == current_user%>
+            <% if @post.user == current_user %>
                 <%= link_to '削除', post_path(@post), data: { turbo_method: :delete }, class: 'btn btn-danger' %>
             <% end %>
+
+            <!-- コメント一覧 -->
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h2>コメント一覧</h2>
+                </div>
+                <div class="card-body">
+                    <% @post.comments.each do |comment| %>
+                        <div class="mb-2">
+                        <div class="d-flex align-items-center card-body" style="background-color: #f8f9fa;">
+                        <%= image_tag comment.user.image, class: "rounded-circle", style: "height: 30px; width: 30px; margin-right: 10px;" if comment.user.image.attached? %>
+                        <h5 class="card-title" style="margin-bottom: 0;"><%= comment.user.name %>
+                        <br> <%= comment.text %>
+                        </h5><p></p>
+                    </div>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+
+            <!-- コメント投稿フォーム -->
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h2>コメントを投稿</h2>
+                </div>
+                <div class="card-body">
+                    <%= form_with(model: [ @post, @post.comments.build ], local: true) do |form| %>
+                        <div class="form-group">
+                            <%= form.text_area :text, placeholder: "コメントを入力してください", class: "form-control", rows: 3 %>
+                        </div>
+                        <%= form.submit "コメントを投稿", class: "btn btn-primary" %>
+                    <% end %>
+                </div>
+            </div>
+            </div>
         </div>
     </div>
+    <div class="col-md-3">
+    </div>
 </div>
-
